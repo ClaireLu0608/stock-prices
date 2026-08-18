@@ -109,6 +109,46 @@ tbody tr:last-child td{border-bottom:none}
 
 footer{font-size:11.5px;color:var(--faint);line-height:1.7;border-top:1px solid var(--hairline);padding-top:13px}
 #loading{color:var(--muted);font-size:14px;padding:30px 0;text-align:center}
+
+  /* 新闻 / 学习 / 催化剂 */
+  .jd{border-left:3px solid var(--accent);padding:2px 0 2px 13px;margin:0 0 16px}
+  .jd:last-child{margin-bottom:0}
+  .jhead{font-weight:650;font-size:15px;line-height:1.45;margin:0 0 3px}
+  .jdate{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.02em}
+  .ev{margin:11px 0 0;padding:0;list-style:none}
+  .ev li{margin:0 0 9px;font-size:13.5px;line-height:1.62}
+  .ev li:last-child{margin-bottom:0}
+  .ev b{display:block;font-weight:620;margin-bottom:1px}
+  .ev span{color:var(--muted)}
+  .act-note{margin:11px 0 0;padding:9px 11px;background:var(--sunken);border-radius:7px;
+    font-size:13px;line-height:1.6;color:var(--muted)}
+  .act-note b{color:var(--ink);font-weight:620}
+  .lz{padding:13px 15px;background:var(--sunken);border-radius:9px;margin:0 0 11px}
+  .lz:last-child{margin-bottom:0}
+  .lz h3{margin:0 0 6px;font-size:14.5px;font-weight:660;letter-spacing:-.01em}
+  .lz p{margin:0;font-size:13.5px;line-height:1.68;color:var(--muted)}
+  details.more{margin-top:14px}
+  details.more>summary{cursor:pointer;font-size:12.5px;color:var(--accent);
+    font-weight:600;list-style:none;padding:6px 0}
+  details.more>summary::-webkit-details-marker{display:none}
+  details.more>summary::before{content:'▸ ';font-size:10px}
+  details.more[open]>summary::before{content:'▾ '}
+  details.more>div{padding-top:12px}
+  .cat{margin:0;padding:0;list-style:none}
+  .cat li{display:flex;gap:12px;align-items:baseline;padding:9px 0;
+    border-bottom:1px solid var(--grid)}
+  .cat li:last-child{border-bottom:0}
+  .cat .cd{font-family:var(--mono);font-size:11.5px;color:var(--faint);
+    flex:0 0 74px;padding-top:2px}
+  .cat .cb{flex:1;min-width:0}
+  .cat .ct{font-size:13.5px;font-weight:620;line-height:1.45}
+  .cat .cw{font-size:12.5px;color:var(--muted);line-height:1.58;margin-top:2px}
+  .cat .cwho{font-size:11px;color:var(--faint);margin-top:2px}
+  .conf{flex:0 0 auto;font-size:10.5px;padding:2px 7px;border-radius:99px;
+    font-weight:640;background:var(--sunken);color:var(--muted);white-space:nowrap}
+  .conf.hi{background:color-mix(in oklab,var(--accent) 15%,transparent);color:var(--accent)}
+  .cat li.done .ct,.cat li.done .cd{opacity:.5}
+  .empty{font-size:13px;color:var(--faint);line-height:1.65;margin:0}
 </style>
 </head>
 <body>
@@ -135,6 +175,55 @@ async function load(f){
   const r = await fetch(`${REPO_RAW}/${f}?t=${Date.now()}`);
   if(!r.ok) throw new Error(`${f} 读取失败（HTTP ${r.status}）`);
   return r.json();
+}
+
+// 日记：机器人每天收盘后写进 ledger.json 的 journal 数组
+function journalCards(J){
+  if(!J || !J.length) return `<p class="empty">机器人还没写第一篇。每天收盘后（中部时间下午 4 点）
+    它会把当天发生的事、为什么这么做，写到这里。</p>`;
+  const one = d => `<div class="jd">
+    <p class="jdate">${esc(d.date)}</p>
+    ${d.headline?`<p class="jhead">${esc(d.headline)}</p>`:''}
+    ${(d.events&&d.events.length)?`<ul class="ev">`+d.events.map(e=>
+      `<li><b>${esc(e.t||'')}</b><span>${esc(e.d||'')}</span></li>`).join('')+`</ul>`:''}
+    ${d.action?`<p class="act-note"><b>我们今天怎么做的：</b>${esc(d.action)}</p>`:''}
+  </div>`;
+  const [head,...rest]=J;
+  return one(head) + (rest.length?`<details class="more"><summary>看更早的
+    ${rest.length} 天</summary><div>`+rest.map(one).join('')+`</div></details>`:'');
+}
+
+function lessonCards(J){
+  const Ls=(J||[]).filter(d=>d.lesson&&d.lesson.t);
+  if(!Ls.length) return `<p class="empty">还没有。这一栏会攒下半年里学到的每一个概念，
+    都是从当天真实行情里取的材，不是课本。</p>`;
+  const one = d => `<div class="lz"><h3>${esc(d.lesson.t)}
+    <span class="jdate" style="font-weight:400"> · ${esc(d.date.slice(5))}</span></h3>
+    <p>${esc(d.lesson.d)}</p></div>`;
+  const [head,...rest]=Ls;
+  return one(head) + (rest.length?`<details class="more"><summary>复习前面学过的
+    ${rest.length} 个</summary><div>`+rest.map(one).join('')+`</div></details>`:'');
+}
+
+function catalystList(C){
+  if(!C||!C.items||!C.items.length) return '';
+  const one = it => `<li class="${it.done?'done':''}">
+    <span class="cd">${esc(it.date)}</span>
+    <div class="cb"><div class="ct">${esc(it.title)}</div>
+      <div class="cw">${esc(it.done&&it.outcome ? '结果：'+it.outcome : it.why)}</div>
+      <div class="cwho">影响：${esc(it.who||'—')}</div></div>
+    <span class="conf ${(it.confidence||'')==='高'?'hi':''}">${esc(it.confidence||'中')}</span></li>`;
+  const up=C.items.filter(i=>!i.done), done=C.items.filter(i=>i.done);
+  return `<section class="sec"><h2>接下来会发生什么</h2>
+    <p class="note">催化剂 = 已经知道会在某天发生、并且大概率让股价动起来的事。
+      提前知道，才不会被"突然"打个措手不及。
+      <b>高</b>=官方已确认日期，<b>中</b>=按历史规律推算。</p>
+    <ul class="cat">${up.slice(0,10).map(one).join('')}</ul>
+    ${up.length>10?`<details class="more"><summary>看更远的 ${up.length-10} 件</summary>
+      <div><ul class="cat">${up.slice(10).map(one).join('')}</ul></div></details>`:''}
+    ${done.length?`<details class="more"><summary>已经发生的 ${done.length} 件（回头对一下当时的判断）</summary>
+      <div><ul class="cat">${done.reverse().map(one).join('')}</ul></div></details>`:''}
+  </section>`;
 }
 
 function chart(curve, live){
@@ -181,6 +270,9 @@ function chart(curve, live){
       稍后重试；若持续失败，检查 GitHub Actions 是否还在运行。</div>`;
     return;
   }
+
+  // 催化剂日历是加分项，读不到也不该让整个看板打不开
+  let CAT=null; try{ CAT = await load('catalysts.json'); }catch(e){ CAT=null; }
 
   const Q=P.quotes, out=[];
   const ageMin=(Date.now()/1000 - P.fetched_at_unix)/60;
@@ -232,6 +324,15 @@ function chart(curve, live){
 
   const liveDate=new Date().toISOString().slice(0,10);
   const hasToday=L.equity_curve.some(r=>r.date===liveDate);
+  const JN=[...(L.journal||[])].reverse();   // 最新在最前
+  out.push(`<section class="sec"><h2>今天发生了什么</h2>
+    <p class="note">当天真正推动市场的事，以及它跟我们手里的股票有什么关系。</p>
+    ` + journalCards(JN) + `</section>`);
+
+  out.push(`<section class="sec"><h2>学过的东西</h2>
+    <p class="note">这个项目的头号目标不是赚钱，是每天学到一个真东西。</p>
+    ` + lessonCards(JN) + `</section>`);
+
   out.push(`<section class="sec"><h2>六个月走势</h2>
     <p class="note">三条线都从 $10,000 起跑。真正的问题不是"我们赚了没"，而是"有没有赢过什么都不做"。</p>
     <div class="chartbox">${chart(L.equity_curve, hasToday?null:{t:Date.now(),us:net,voo:bench.VOO,qqq:bench.QQQ})}</div>
@@ -290,6 +391,8 @@ function chart(curve, live){
       <span class="co" style="font-size:11px">${d}</span></td>
       <td class="${sign(Q[t].change_pct)}">${arrow(Q[t].change_pct)} ${pct(Q[t].change_pct)}</td></tr>`).join('') +
     `</tbody></table></div></section>`);
+
+  out.push(catalystList(CAT));
 
   out.push(`<section class="sec"><h2>做过的每一笔</h2>
     <p class="note">每笔都记着当时的理由。半年后回头看，才知道哪些判断对、哪些错。</p>
