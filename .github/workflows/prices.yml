@@ -31,6 +31,7 @@ jobs:
           git config user.name  "prices-bot"
           git config user.email "prices-bot@users.noreply.github.com"
           git add prices.json
-          # 即使价格没变也提交，让 fetched_at_utc 更新——读取方靠它判断数据是否过期
           git commit -m "prices $(date -u +%Y-%m-%dT%H:%MZ)" || echo "无变化，跳过"
+          # 机器人可能刚写过 ledger.json，先合并再推，避免撞车
+          git pull --rebase --autostash origin main || true
           git push
