@@ -374,6 +374,41 @@ function chart(curve, live){
     </article></div></section>`);
 
   // ── 板块热力：钱在往哪个行业流 ──
+  // ── 大盘：用真实指数/商品/利率，不再是 ETF 的替身 ──
+  const M = P.macro || {};
+  const num = (v,d=2) => v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const IDX = [['SP500','S&P 500','美国 500 家大公司，最常说的「大盘」'],
+               ['NASDAQ','Nasdaq','科技股为主'],
+               ['DOW','Dow','30 家老牌工业巨头'],
+               ['SOX','费城半导体','芯片股的体温计，我们持有 TSM']];
+  const CMD = [['VIX','恐慌指数','低=市场淡定，高=在害怕。20 以上算紧张',v=>num(v)],
+               ['WTI','原油','美元/桶。直接决定我们两只石油股',v=>'$'+num(v)],
+               ['GOLD','黄金','美元/盎司。金矿股 NEM 跟着它走',v=>'$'+num(v)],
+               ['US10Y','10年期国债利息','钱存最安全的地方能拿多少。它高，贵价股就难受',v=>num(v)+'%'],
+               ['US30Y','30年期国债利息','更长的钱。和 10 年期一比能看出市场怎么想未来',v=>num(v)+'%'],
+               ['DXY','美元指数','美元贵了，油和金这些用美元标价的东西就承压',v=>num(v)]];
+
+  const hasM = Object.keys(M).length > 0;
+  if (hasM) {
+    const idxRows = IDX.filter(([k])=>M[k]).map(([k,n,d])=>`<tr>
+      <td>${n}<br><span class="co" style="font-size:11px">${d}</span></td>
+      <td class="num">${num(M[k].price, M[k].price>1000?0:2)}</td>
+      <td class="${sign(M[k].change_pct)}">${arrow(M[k].change_pct)} ${pct(M[k].change_pct)}</td></tr>`).join('');
+    // 利率、恐慌指数、美元不套涨=绿的配色 —— 利息涨不是好事，涨绿了会误导
+    const cmdRows = CMD.filter(([k])=>M[k]).map(([k,n,d,f])=>{
+      const isY = k.startsWith('US');
+      const chg = isY ? (M[k].price-M[k].prev_close) : M[k].change_pct;
+      const txt = isY ? (chg>=0?'+':'') + chg.toFixed(3) + ' 个百分点' : pct(M[k].change_pct);
+      return `<tr><td>${n}<br><span class="co" style="font-size:11px">${d}</span></td>
+        <td class="num">${f(M[k].price)}</td>
+        <td class="num flat">${arrow(chg)} ${txt}</td></tr>`;
+    }).join('');
+    out.push(`<section class="sec"><h2>今天大盘怎么样</h2>
+      <p class="note">这些是真实的指数和价格，不是替代品。<b>下半张表不标红绿</b>——利息涨、油价涨对我们是好是坏要看情况，用颜色下结论会误导。</p>
+      <div class="scroller"><table><tbody>${idxRows}</tbody></table></div>
+      <div class="scroller"><table><tbody>${cmdRows}</tbody></table></div></section>`);
+  }
+
   const SECT=[['XLE','能源'],['XLK','科技'],['XLF','金融'],['XLV','医疗'],['XLU','公用事业'],['XLP','必需消费'],
               ['XLY','可选消费'],['XLI','工业'],['XLB','材料'],['XLRE','房地产'],['XLC','通讯服务']]
     .filter(([t])=>Q[t]).map(([t,n])=>({t,n,c:Q[t].change_pct})).sort((a,b)=>b.c-a.c);
@@ -382,11 +417,11 @@ function chart(curve, live){
     <div class="scroller"><table><tbody>` + SECT.map(s=>`<tr><td>${s.n}<span class="co"> ${s.t}</span></td>
       <td class="${sign(s.c)}">${arrow(s.c)} ${pct(s.c)}</td></tr>`).join('') + `</tbody></table></div></section>`);
 
-  const MACRO=[['TLT','20年期国债','利息涨它就跌，是利率的镜子'],['SHY','短期国债','和 TLT 一比就是收益率曲线'],
-    ['GLD','黄金','避险情绪'],['USO','原油','直接影响我们的石油仓位'],
-    ['IWM','小盘股','对利率最敏感'],['HYG','垃圾债','市场压力的早期警报'],['UUP','美元','涨则大宗商品承压']]
+  // GLD/USO/UUP 已被上面的真实金价、油价、美元指数取代，这里只留独有信息
+  const MACRO=[['TLT','20年期国债 ETF','利息涨它就跌'],['SHY','短期国债 ETF','和 TLT 一比就是收益率曲线'],
+    ['IWM','小盘股','对利率最敏感的一群公司'],['HYG','垃圾债','市场压力的早期警报，常比股市先跌']]
     .filter(([t])=>Q[t]);
-  if(MACRO.length) out.push(`<section class="sec"><h2>宏观风向</h2><div class="scroller"><table>
+  if(MACRO.length) out.push(`<section class="sec"><h2>几个提前预警的信号</h2><div class="scroller"><table>
     <tbody>` + MACRO.map(([t,n,d])=>`<tr><td>${n}<span class="co"> ${t}</span><br>
       <span class="co" style="font-size:11px">${d}</span></td>
       <td class="${sign(Q[t].change_pct)}">${arrow(Q[t].change_pct)} ${pct(Q[t].change_pct)}</td></tr>`).join('') +
