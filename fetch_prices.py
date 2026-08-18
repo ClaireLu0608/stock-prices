@@ -9,9 +9,79 @@
 import json, os, sys, time
 import urllib.request, urllib.error
 
-SYMBOLS = ["COP", "NEM", "JPM", "TSM", "XOM", "SLB",   # 持仓
-           "VOO", "QQQ",                               # 基准
-           "NVDA", "AMD"]                              # 观察名单
+SYMBOLS = [
+    # ── 持仓（算净值、查止损用）──
+    "COP", "NEM", "JPM", "TSM", "XOM", "SLB",
+    # ── 业绩基准 ──
+    "VOO",   # 追踪 S&P 500，等于买下整个美国大盘
+    "QQQ",   # 追踪纳斯达克 100，等于买下美国科技股
+    # ── 板块 ETF：直接看到钱在往哪个行业流 ──
+    "XLE",   # 能源
+    "XLK",   # 科技
+    "XLF",   # 金融
+    "XLV",   # 医疗
+    "XLU",   # 公用事业（利率敏感的典型）
+    "XLP",   # 必需消费（防守）
+    "XLY",   # 可选消费（经济好坏的温度计）
+    "XLI",   # 工业
+    "XLB",   # 材料
+    "XLRE",  # 房地产——对利率最敏感的板块
+    "XLC",   # 通讯服务（含 Meta、Google）
+    # ── 宏观锚：把抽象概念变成能读的价格 ──
+    "GLD",   # 黄金
+    "TLT",   # 20年期以上美国国债——利率的镜子，利息涨它就跌
+    "SHY",   # 1-3年短期国债——和 TLT 一对比就是"收益率曲线"，我们买 JPM 的依据
+    "USO",   # 原油
+    "IWM",   # 罗素2000小盘股——对利率最敏感，"利率如何影响股票"最好的教具
+    "HYG",   # 高收益债（垃圾债）——市场压力的早期警报器，常比股市先跌
+    "UUP",   # 美元指数——美元涨则大宗商品跌，影响石油仓位和台积电
+    # ── 估值对照实验：高 PE vs 低 PE 在利率上行时的表现差异 ──
+    "NVDA",  # PE 约 34
+    "AMD",   # PE 约 131 —— 太贵，只观察不买
+    # ── 候选替补：换股时有价格可参考，买之前就在名单上，不用临时改代码 ──
+    "CVX",   # 雪佛龙——石油，对照 XOM
+    "AEM",   # Agnico Eagle——金矿，对照 NEM
+    "GS",    # 高盛——投行，对照 JPM 这种综合银行
+    "MU",    # 美光——内存芯片，芯片周期的另一个观察点
+    "AVGO",  # 博通——AI 芯片的另一极
+    "WMT",   # 沃尔玛——消费者健康度最权威的读数
+    "HD",    # 家得宝——房地产与大额消费
+    "AAPL",  # 苹果——科技龙头权重股
+    "MSFT",  # 微软——同上
+    # ── 各板块龙头：板块指数动的时候，得知道是谁在动 ──
+    "GOOGL", # 通讯服务（XLC 的最大权重）
+    "META",  # 通讯服务
+    "AMZN",  # 可选消费（XLY）
+    "TSLA",  # 可选消费
+    "LLY",   # 医疗（XLV）
+    "UNH",   # 医疗保险
+    "JNJ",   # 医疗，防守型
+    "PG",    # 必需消费（XLP）
+    "KO",    # 必需消费
+    "COST",  # 必需消费
+    "CAT",   # 工业（XLI），全球经济的风向标
+    "GE",    # 工业
+    "LIN",   # 材料（XLB）
+    "NEE",   # 公用事业（XLU），对利率极敏感
+    "PLD",   # 房地产（XLRE）
+    "BAC",   # 金融，对照 JPM
+    "BRK.B", # 伯克希尔，巴菲特的持仓组合
+    "ORCL",  # 科技，AI 基建的另一条线
+]
+
+# 机器人可以往 watchlist.json 里写想跟踪的股票，这里自动合并进来。
+# 上限 20 只，防止它无节制地扩张导致抓取时间失控。
+try:
+    with open("watchlist.json") as _f:
+        _extra = [str(t).strip().upper() for t in json.load(_f).get("tickers", []) if str(t).strip()]
+    _added = [t for t in _extra[:20] if t not in SYMBOLS]
+    SYMBOLS = SYMBOLS + _added
+    if _added:
+        print(f"watchlist.json 追加了 {len(_added)} 只: {_added}")
+except FileNotFoundError:
+    pass
+except Exception as _e:
+    print(f"watchlist.json 读取失败（忽略，不影响主名单）: {_e}", file=sys.stderr)
 
 TOKEN = os.environ.get("FINNHUB_TOKEN", "").strip()
 if not TOKEN:
