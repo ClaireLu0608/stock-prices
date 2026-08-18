@@ -1,0 +1,36 @@
+name: fetch-prices
+
+on:
+  schedule:
+    # 每 30 分钟一次，UTC 13:00–22:59 的工作日。
+    # 这个区间同时覆盖夏令时（盘中 13:30–20:00 UTC）和冬令时（14:30–21:00 UTC）。
+    # GitHub 不保证准点，高负载时可能延迟 15 分钟以上——所以跑得比需要的密。
+    - cron: "*/30 13-22 * * 1-5"
+  workflow_dispatch:        # 允许手动触发，方便配置时验证
+
+permissions:
+  contents: write           # 需要写权限才能把 prices.json 提交回仓库
+
+concurrency:
+  group: fetch-prices
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 抓取报价
+        env:
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+        run: python3 fetch_prices.py
+
+      - name: 提交
+        run: |
+          git config user.name  "prices-bot"
+          git config user.email "prices-bot@users.noreply.github.com"
+          git add prices.json
+          # 即使价格没变也提交，让 fetched_at_utc 更新——读取方靠它判断数据是否过期
+          git commit -m "prices $(date -u +%Y-%m-%dT%H:%MZ)" || echo "无变化，跳过"
+          git push
