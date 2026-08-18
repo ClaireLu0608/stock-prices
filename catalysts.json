@@ -1,0 +1,204 @@
+{
+  "updated_utc": "2026-08-18T19:47:06Z",
+  "note": "催化剂 = 已知会在某个具体日子发生、且大概率让股价动起来的事。置信度：高=官方已确认，中=按历史规律推算，低=传闻。已发生的不删除，标记 done 并补上实际结果 vs 预期。",
+  "items": [
+    {
+      "date": "8/19",
+      "title": "TGT / LOW 财报 + 7月 FOMC 会议纪要",
+      "who": "大盘情绪",
+      "why": "纪要能看出 Fed 内部在「9月该不该动利率」上分歧有多大。分歧越大波动越大",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "8/20",
+      "title": "WMT 沃尔玛财报",
+      "who": "大盘情绪",
+      "why": "本季度最权威的美国消费者健康度读数。沃尔玛服务最广泛的普通家庭，比任何宏观统计都直观",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "8/26",
+      "title": "NVDA 英伟达财报（盘后）",
+      "who": "芯片股全体",
+      "why": "窗口期内最大的单一事件。预期营收 $91.8B–95B，同比 +67%。台积电是它的独家代工厂",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "8/27–29",
+      "title": "杰克逊霍尔央行年会",
+      "who": "全市场",
+      "why": "Fed 主席 Warsh 首次主题演讲，他偏鹰。历史上多次引发大幅波动，对国债利息和贵价股影响最直接",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "9/6",
+      "title": "OPEC+ 会议",
+      "who": "石油股",
+      "why": "9月已批准增产 18.8 万桶/日。若改口继续增产，油价承压，我们 31.7% 的石油仓位受损",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "9/7",
+      "title": "劳工节休市",
+      "who": "—",
+      "why": "—",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "~9/10",
+      "title": "TSMC 8月营收",
+      "who": "TSM",
+      "why": "台积电每月约 10 号公布，是全行业最高频的 AI 需求实时读数",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "9/15–16",
+      "title": "FOMC 决议 + 点阵图",
+      "who": "全市场",
+      "why": "窗口期内最大的宏观事件。点阵图披露每位官员对未来利率的匿名预测",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "~10/10",
+      "title": "TSMC 9月营收 + Q3 汇总",
+      "who": "TSM",
+      "why": "对照公司给的 $44.6B–45.8B 指引",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/13",
+      "title": "JPM 摩根大通财报",
+      "who": "我们的持仓",
+      "why": "Q3 财报季开幕战。银行财报同时透露企业和个人还愿不愿意借钱",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/15",
+      "title": "TSM 台积电 Q3 财报",
+      "who": "我们的持仓",
+      "why": "持有过财报还是提前了结，需在 10 月初就想清楚",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/19",
+      "title": "阶段总复盘 ①",
+      "who": "—",
+      "why": "两个月成绩结算，也是中途退出点",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/22",
+      "title": "NEM 纽蒙特 Q3 财报",
+      "who": "我们的持仓",
+      "why": "金矿的成本控制和产量指引",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/23",
+      "title": "XOM 埃克森 Q3 财报",
+      "who": "我们的持仓",
+      "why": "油价高企下的实际盈利兑现程度",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "10/27–28",
+      "title": "FOMC",
+      "who": "全市场",
+      "why": "无点阵图，但会后声明措辞会被逐字解读",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "11月下旬",
+      "title": "NVDA 财报（第二次）",
+      "who": "芯片股",
+      "why": "对照 8/26 那次的预判 —— 整个计划里最有效的学习机制",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "11/26",
+      "title": "感恩节休市",
+      "who": "—",
+      "why": "次日 11/27 提前至中部时间 12:00 收盘",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "12/8–9",
+      "title": "FOMC + 阶段总复盘 ②",
+      "who": "全市场",
+      "why": "2026 年最后一次 FOMC，含点阵图。四个月成绩结算",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "1月中",
+      "title": "TSM Q4 财报（第二次）",
+      "who": "我们的持仓",
+      "why": "对照 10/15 那次",
+      "confidence": "中",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "1/26–27",
+      "title": "FOMC",
+      "who": "全市场",
+      "why": "2027 年第一次",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "1–2月",
+      "title": "Q4 财报季",
+      "who": "全市场",
+      "why": "全年总结 + 下一年指引，指引往往比业绩更影响股价",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    },
+    {
+      "date": "2/19",
+      "title": "最终总复盘",
+      "who": "—",
+      "why": "6 个月结束",
+      "confidence": "高",
+      "done": false,
+      "outcome": null
+    }
+  ]
+}
