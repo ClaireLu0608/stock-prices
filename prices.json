@@ -1,7 +1,7 @@
 {
-  "fetched_at_utc": "2026-08-18T21:51:16Z",
-  "fetched_at_unix": 1787089876,
-  "source": "finnhub.io/api/v1/quote",
+  "fetched_at_utc": "2026-08-18T22:22:39Z",
+  "fetched_at_unix": 1787091759,
+  "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
   "quotes": {
@@ -556,5 +556,88 @@
       "quote_unix": 1787083200
     }
   },
-  "errors": []
+  "errors": [],
+  "macro": {
+    "SP500": {
+      "price": 7691.76,
+      "prev_close": 7785.76,
+      "change": -94.0,
+      "change_pct": -1.2073,
+      "symbol": "^GSPC",
+      "desc": "S&P 500 指数"
+    },
+    "NASDAQ": {
+      "price": 26289.71,
+      "prev_close": 26729.16,
+      "change": -439.45,
+      "change_pct": -1.6441,
+      "symbol": "^IXIC",
+      "desc": "Nasdaq 综合指数"
+    },
+    "DOW": {
+      "price": 53343.4,
+      "prev_close": 53732.41,
+      "change": -389.01,
+      "change_pct": -0.724,
+      "symbol": "^DJI",
+      "desc": "Dow 道琼斯工业指数"
+    },
+    "VIX": {
+      "price": 15.84,
+      "prev_close": 15.19,
+      "change": 0.65,
+      "change_pct": 4.2791,
+      "symbol": "^VIX",
+      "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
+    },
+    "SOX": {
+      "price": 11992.463,
+      "prev_close": 12417.05,
+      "change": -424.587,
+      "change_pct": -3.4194,
+      "symbol": "^SOX",
+      "desc": "费城半导体指数"
+    },
+    "WTI": {
+      "price": 84.52,
+      "prev_close": 84.5,
+      "change": 0.02,
+      "change_pct": 0.0237,
+      "symbol": "CL=F",
+      "desc": "WTI 原油期货，美元/桶"
+    },
+    "GOLD": {
+      "price": 4394.7,
+      "prev_close": 4417.8,
+      "change": -23.1,
+      "change_pct": -0.5229,
+      "symbol": "GC=F",
+      "desc": "黄金期货，美元/盎司"
+    },
+    "US10Y": {
+      "price": 4.706,
+      "prev_close": 4.724,
+      "change": -0.018,
+      "change_pct": -0.381,
+      "symbol": "^TNX",
+      "desc": "10 年期美国国债利息，%"
+    },
+    "US30Y": {
+      "price": 5.285,
+      "prev_close": 5.309,
+      "change": -0.024,
+      "change_pct": -0.4521,
+      "symbol": "^TYX",
+      "desc": "30 年期美国国债利息，%"
+    },
+    "DXY": {
+      "price": 99.644,
+      "prev_close": 99.64,
+      "change": 0.004,
+      "change_pct": 0.004,
+      "symbol": "DX-Y.NYB",
+      "desc": "美元指数"
+    }
+  },
+  "macro_errors": []
 }
