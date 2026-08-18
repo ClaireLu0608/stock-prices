@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "start_date": "2026-08-18",
+    "end_date": "2027-02-19",
+    "initial_capital": 10000.0,
+    "circuit_breaker": 9200.0,
+    "stretch_target": 11000.0,
+    "rules": {
+      "max_position_pct": 25,
+      "stop_loss_pct": -8,
+      "take_profit_pct": 15,
+      "max_trades_per_day": 2,
+      "max_trades_per_week": 6,
+      "min_hold_hours": 2,
+      "positions_range": [
+        5,
+        8
+      ],
+      "settlement": "T+1"
+    }
+  },
+  "cash": 2626.81,
+  "positions": [
+    {
+      "ticker": "COP",
+      "name": "康菲国际",
+      "shares": 12,
+      "cost": 129.0,
+      "stop_loss": 118.68,
+      "take_profit": 148.35,
+      "opened": "2026-08-18",
+      "driver": "油价",
+      "reason": "纯上游石油——油价涨多少它赚多少，中间没缓冲。Q2 每股赚 $3.24 超预期 $2.89，产量创纪录"
+    },
+    {
+      "ticker": "NEM",
+      "name": "纽蒙特矿业",
+      "shares": 13,
+      "cost": 117.22,
+      "stop_loss": 107.84,
+      "take_profit": 134.8,
+      "opened": "2026-08-18",
+      "driver": "金价/避险",
+      "reason": "全球最大金矿。世界越乱黄金越有人买。建仓当天逆势跌 2.58%，等于打折入场"
+    },
+    {
+      "ticker": "JPM",
+      "name": "摩根大通",
+      "shares": 4,
+      "cost": 360.02,
+      "stop_loss": 331.22,
+      "take_profit": 414.02,
+      "opened": "2026-08-18",
+      "driver": "利率曲线",
+      "reason": "美国最大银行，15.5 倍 PE。收益率曲线变陡对银行有利"
+    },
+    {
+      "ticker": "TSM",
+      "name": "台积电",
+      "shares": 3,
+      "cost": 412.65,
+      "stop_loss": 379.64,
+      "take_profit": 474.55,
+      "opened": "2026-08-18",
+      "driver": "AI资本开支",
+      "reason": "给英伟达苹果代工最先进芯片。建仓当天跌 4.25%，但 7 月营收同比 +44.7% 创纪录——跌是大盘杀高估值，不是公司出事"
+    },
+    {
+      "ticker": "XOM",
+      "name": "埃克森美孚",
+      "shares": 6,
+      "cost": 163.45,
+      "stop_loss": 150.37,
+      "take_profit": 187.97,
+      "opened": "2026-08-18",
+      "driver": "油价",
+      "reason": "美国最大石油公司，2.5% 股息，前瞻 PE 仅 13.4，组合里的防守型石油仓位"
+    },
+    {
+      "ticker": "SLB",
+      "name": "斯伦贝谢",
+      "shares": 12,
+      "cost": 53.55,
+      "stop_loss": 49.27,
+      "take_profit": 61.58,
+      "opened": "2026-08-18",
+      "driver": "油服",
+      "reason": "油服——给石油公司提供钻井技术。油价涨时弹性比 XOM 大，但波动也大，所以仓位最小"
+    }
+  ],
+  "benchmarks": {
+    "VOO": {
+      "shares": 14.1639,
+      "base_price": 706.02,
+      "note": "追踪 S&P 500"
+    },
+    "QQQ": {
+      "shares": 13.9458,
+      "base_price": 717.06,
+      "note": "追踪纳斯达克100"
+    }
+  },
+  "trades": [
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "COP",
+      "shares": 12,
+      "price": 129.0,
+      "amount": 1548.0,
+      "reason": "纯上游石油——油价涨多少它赚多少，中间没缓冲。Q2 每股赚 $3.24 超预期 $2.89，产量创纪录"
+    },
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "NEM",
+      "shares": 13,
+      "price": 117.22,
+      "amount": 1523.86,
+      "reason": "全球最大金矿。世界越乱黄金越有人买。建仓当天逆势跌 2.58%，等于打折入场"
+    },
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "JPM",
+      "shares": 4,
+      "price": 360.02,
+      "amount": 1440.08,
+      "reason": "美国最大银行，15.5 倍 PE。收益率曲线变陡对银行有利"
+    },
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "TSM",
+      "shares": 3,
+      "price": 412.65,
+      "amount": 1237.95,
+      "reason": "给英伟达苹果代工最先进芯片。建仓当天跌 4.25%，但 7 月营收同比 +44.7% 创纪录——跌是大盘杀高估值，不是公司出事"
+    },
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "XOM",
+      "shares": 6,
+      "price": 163.45,
+      "amount": 980.7,
+      "reason": "美国最大石油公司，2.5% 股息，前瞻 PE 仅 13.4，组合里的防守型石油仓位"
+    },
+    {
+      "date": "2026-08-18",
+      "time_et": "10:57",
+      "action": "BUY",
+      "ticker": "SLB",
+      "shares": 12,
+      "price": 53.55,
+      "amount": 642.6,
+      "reason": "油服——给石油公司提供钻井技术。油价涨时弹性比 XOM 大，但波动也大，所以仓位最小"
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2026-08-18",
+      "net_worth": 10000.0,
+      "cash": 2626.81,
+      "voo_value": 10000.0,
+      "qqq_value": 10000.0,
+      "note": "建仓日"
+    }
+  ],
+  "last_updated_utc": "2026-08-18T19:16:50Z",
+  "last_updated_by": "local-session (initial migration)"
+}
