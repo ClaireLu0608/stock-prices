@@ -1,0 +1,110 @@
+{
+  "fetched_at_utc": "2026-08-18T18:01:43Z",
+  "fetched_at_unix": 1787076103,
+  "source": "finnhub.io/api/v1/quote",
+  "symbols_requested": 10,
+  "symbols_ok": 10,
+  "quotes": {
+    "COP": {
+      "price": 129.91,
+      "change": 2.35,
+      "change_pct": 1.8423,
+      "prev_close": 127.56,
+      "open": 128.655,
+      "high": 130.1227,
+      "low": 128.1,
+      "quote_unix": 1787076060
+    },
+    "NEM": {
+      "price": 116.34,
+      "change": -3.99,
+      "change_pct": -3.3159,
+      "prev_close": 120.33,
+      "open": 118.705,
+      "high": 119.44,
+      "low": 116.17,
+      "quote_unix": 1787076067
+    },
+    "JPM": {
+      "price": 361.06,
+      "change": 0.1,
+      "change_pct": 0.0277,
+      "prev_close": 360.96,
+      "open": 361.245,
+      "high": 362.78,
+      "low": 359.27,
+      "quote_unix": 1787076062
+    },
+    "TSM": {
+      "price": 412.01,
+      "change": -18.96,
+      "change_pct": -4.3994,
+      "prev_close": 430.97,
+      "open": 419.725,
+      "high": 419.725,
+      "low": 411.41,
+      "quote_unix": 1787076071
+    },
+    "XOM": {
+      "price": 165.18,
+      "change": 3.72,
+      "change_pct": 2.304,
+      "prev_close": 161.46,
+      "open": 163.365,
+      "high": 165.37,
+      "low": 163.254,
+      "quote_unix": 1787076071
+    },
+    "SLB": {
+      "price": 53.3,
+      "change": -0.56,
+      "change_pct": -1.0397,
+      "prev_close": 53.86,
+      "open": 54.03,
+      "high": 54.58,
+      "low": 53.18,
+      "quote_unix": 1787076060
+    },
+    "VOO": {
+      "price": 705.59,
+      "change": -4.68,
+      "change_pct": -0.6589,
+      "prev_close": 710.27,
+      "open": 706.61,
+      "high": 707.35,
+      "low": 705.355,
+      "quote_unix": 1787076067
+    },
+    "QQQ": {
+      "price": 717.27,
+      "change": -12.6,
+      "change_pct": -1.7263,
+      "prev_close": 729.87,
+      "open": 721.735,
+      "high": 722.13,
+      "low": 715.92,
+      "quote_unix": 1787076072
+    },
+    "NVDA": {
+      "price": 220.06,
+      "change": -4.95,
+      "change_pct": -2.1999,
+      "prev_close": 225.01,
+      "open": 221.6,
+      "high": 221.64,
+      "low": 218.6902,
+      "quote_unix": 1787076072
+    },
+    "AMD": {
+      "price": 476.69,
+      "change": -29.31,
+      "change_pct": -5.7925,
+      "prev_close": 506,
+      "open": 491.285,
+      "high": 491.81,
+      "low": 474.975,
+      "quote_unix": 1787076071
+    }
+  },
+  "errors": []
+}
