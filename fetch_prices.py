@@ -7,7 +7,7 @@
   - 全部失败才以非零码退出（让 Actions 标红），部分成功照常提交
 """
 import json, os, sys, time
-import urllib.request, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
 SYMBOLS = [
     # ── 持仓（算净值、查止损用）──
@@ -109,20 +109,66 @@ for s in SYMBOLS:
         print(f"  {s:5} 失败: {e}", file=sys.stderr)
     time.sleep(1.2)                          # 免费额度 60次/分钟，留足余量
 
+
+# ── 宏观真实数据（Yahoo chart API，不需要密钥）──
+# 为什么要这一段：机器人在云端拿不到这些数字，只能从新闻里抄。
+# 2026-08-18 的第一份日报证明抄会错——油价、金价、SOX、10年期国债四个全抄错了，
+# 其中国债那个连方向都反了（报告说"利息维持高位"，实际当天是跌的），
+# 导致整条因果链变成事后编的故事。抓下来它就不用抄。
+MACRO = {
+    "SP500":  ("^GSPC",     "S&P 500 指数"),
+    "NASDAQ": ("^IXIC",     "Nasdaq 综合指数"),
+    "DOW":    ("^DJI",      "Dow 道琼斯工业指数"),
+    "VIX":    ("^VIX",      "恐慌指数——低说明市场淡定，高说明在害怕"),
+    "SOX":    ("^SOX",      "费城半导体指数"),
+    "WTI":    ("CL=F",      "WTI 原油期货，美元/桶"),
+    "GOLD":   ("GC=F",      "黄金期货，美元/盎司"),
+    "US10Y":  ("^TNX",      "10 年期美国国债利息，%"),
+    "US30Y":  ("^TYX",      "30 年期美国国债利息，%"),
+    "DXY":    ("DX-Y.NYB",  "美元指数"),
+}
+
+def yahoo(sym):
+    url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
+           + urllib.parse.quote(sym) + "?range=2d&interval=1d")
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        m = json.load(r)["chart"]["result"][0]["meta"]
+    price = m.get("regularMarketPrice")
+    prev  = m.get("chartPreviousClose") or m.get("previousClose")
+    if price is None or not prev:
+        raise ValueError(f"无效: price={price} prev={prev}")
+    return {"price": round(price, 4), "prev_close": round(prev, 4),
+            "change": round(price - prev, 4),
+            "change_pct": round((price / prev - 1) * 100, 4)}
+
+macro, macro_errors = {}, []
+for key, (sym, desc) in MACRO.items():
+    try:
+        macro[key] = {**yahoo(sym), "symbol": sym, "desc": desc}
+        print(f"  {key:7} {macro[key]['price']:>12}  ({macro[key]['change_pct']:+.2f}%)")
+    except Exception as e:
+        macro_errors.append({"key": key, "symbol": sym, "error": str(e)[:200]})
+        print(f"  {key:7} 失败: {e}", file=sys.stderr)
+    time.sleep(0.4)
+# 宏观失败不影响主流程——个股报价才是算净值的命根子
+
 out = {
     "fetched_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     "fetched_at_unix": int(time.time()),
-    "source": "finnhub.io/api/v1/quote",
+    "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
     "symbols_requested": len(SYMBOLS),
     "symbols_ok": len(quotes),
     "quotes": quotes,
     "errors": errors,
+    "macro": macro,
+    "macro_errors": macro_errors,
 }
 with open("prices.json", "w") as f:
     json.dump(out, f, indent=2, ensure_ascii=False)
     f.write("\n")
 
-print(f"\n成功 {len(quotes)}/{len(SYMBOLS)}，写入 prices.json")
+print(f"\n个股 {len(quotes)}/{len(SYMBOLS)}，宏观 {len(macro)}/{len(MACRO)}，写入 prices.json")
 if not quotes:
     print("FATAL: 全部失败", file=sys.stderr)
     sys.exit(1)
