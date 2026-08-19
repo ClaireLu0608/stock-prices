@@ -512,6 +512,18 @@ function chart(curve, live){
     这是模拟盘学习记录，<b>不是真钱，也不构成投资建议</b>。</footer>`);
 
   loading.hidden=true; app.hidden=false; app.innerHTML=out.join('');
+
+  // ── 自动刷新 ──
+  // 每 2 分钟去看一眼有没有新数据，只在真的抓到新价格时才重载。
+  // 不无脑定时重载：抓价本身 25-35 分钟才一次，频繁重载会把展开的
+  // 「看更早的」折叠回去，白白打断阅读。休市时完全不轮询。
+  setInterval(async ()=>{
+    if(!marketState().open || document.hidden) return;
+    try{
+      const fresh = await load('prices.json');
+      if(fresh.fetched_at_unix !== P.fetched_at_unix) location.reload();
+    }catch(e){ /* 网络抖动，等下一轮 */ }
+  }, 120000);
 })();
 </script>
 </body>
