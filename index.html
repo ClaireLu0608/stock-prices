@@ -39,6 +39,7 @@ h1,h2{text-wrap:balance;margin:0}
   border:1px solid var(--down);background:var(--sunken);color:var(--ink)}
 .banner b{color:var(--down)}
 .banner.ok{border-color:var(--hairline)}
+.banner.ok b{color:var(--muted)}
 
 .hero{background:var(--surface);border:1px solid var(--hairline);border-radius:4px;
   padding:22px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:18px}
@@ -177,6 +178,27 @@ async function load(f){
   return r.json();
 }
 
+// 美股此刻开着吗 —— 决定「价格旧了」是故障还是正常
+// 不判断这个，收盘后和整个周末都会弹红色警报；
+// 每天都喊狼来了的警报，真出事那天也不会有人看。
+const HOLIDAYS = ['2026-09-07','2026-11-26','2026-12-25',
+                  '2027-01-01','2027-01-18','2027-02-15'];
+const EARLY_CLOSE = {'2026-11-27': 13*60};   // 感恩节次日提前到美东 13:00
+function marketState(){
+  const f = new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',
+    weekday:'short', year:'numeric', month:'2-digit', day:'2-digit',
+    hour:'2-digit', minute:'2-digit', hour12:false});
+  const p = Object.fromEntries(f.formatToParts(new Date()).map(x=>[x.type,x.value]));
+  const date = `${p.year}-${p.month}-${p.day}`;
+  const dow  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(p.weekday);
+  const mins = (+p.hour)*60 + (+p.minute);
+  const close = EARLY_CLOSE[date] ?? 16*60;
+  const tradingDay = dow>=1 && dow<=5 && !HOLIDAYS.includes(date);
+  return { date, tradingDay, open: tradingDay && mins>=9*60+30 && mins<close,
+           et: `${p.hour}:${p.minute}` };
+}
+
+
 // 日记：机器人每天收盘后写进 ledger.json 的 journal 数组
 function journalCards(J){
   if(!J || !J.length) return `<p class="empty">机器人还没写第一篇。每天收盘后（中部时间下午 4 点）
@@ -276,13 +298,18 @@ function chart(curve, live){
 
   const Q=P.quotes, out=[];
   const ageMin=(Date.now()/1000 - P.fetched_at_unix)/60;
+  const MKT=marketState();
 
   // ── 与机器人同一套防御：数据陈旧、持仓缺失都要大声报出来，绝不静默算错 ──
   const missing=L.positions.filter(p=>!Q[p.ticker]).map(p=>p.ticker);
   if(missing.length) out.push(`<div class="banner"><b>⚠️ 持仓 ${missing.join('、')} 不在价格文件里</b><br>
     净值无法计算。需把它加进 <code>fetch_prices.py</code> 的 SYMBOLS 列表。</div>`);
-  else if(ageMin>120) out.push(`<div class="banner"><b>⚠️ 价格已过期</b><br>
-    最后更新于 ${Math.round(ageMin)} 分钟前（${esc(P.fetched_at_utc)}）。下面的数字仅供参考，请检查 GitHub Actions。</div>`);
+  else if(MKT.open && ageMin>120) out.push(`<div class="banner"><b>⚠️ 价格没在更新</b><br>
+    现在美股开着（美东 ${MKT.et}），但价格停在 ${Math.round(ageMin)} 分钟前（${esc(P.fetched_at_utc)}）。
+    下面的数字不是当前行情，请检查 GitHub Actions 是否还在跑。</div>`);
+  else if(!MKT.open) out.push(`<div class="banner ok"><b>美股现在休市</b>（美东 ${MKT.et}）。
+    下面是最后一次抓到的价格${MKT.tradingDay?'，也就是今天的收盘价':''}，
+    截至 ${esc(P.fetched_at_utc)}。<b style="color:var(--muted)">这是正常的，不是故障。</b></div>`);
 
   if(missing.length){ loading.hidden=true; app.hidden=false; app.innerHTML=out.join(''); return; }
 
@@ -295,7 +322,9 @@ function chart(curve, live){
   const init=L.meta.initial_capital;
   const bench=Object.fromEntries(Object.entries(L.benchmarks).map(([k,v])=>[k, v.shares*Q[k].price]));
   const netPct=(net/init-1)*100, vooPct=(bench.VOO/init-1)*100, qqqPct=(bench.QQQ/init-1)*100;
-  const prev=L.equity_curve.length?L.equity_curve[L.equity_curve.length-1].net_worth:init;
+  // 收盘后当天那条已写进 equity_curve，拿它当"昨天"会永远算出 ±$0.00
+  const priorDays=(L.equity_curve||[]).filter(r=>r.date < MKT.date);
+  const prev=priorDays.length ? priorDays[priorDays.length-1].net_worth : init;
   const dayChg=net-prev, dayPct=(net/prev-1)*100;
   const daysLeft=Math.max(0,Math.ceil((Date.parse(L.meta.end_date)-Date.now())/864e5));
   const gaugePos=Math.max(0,Math.min(100,(net-L.meta.circuit_breaker)/(L.meta.stretch_target-L.meta.circuit_breaker)*100));
