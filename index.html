@@ -25,15 +25,16 @@
 *,*::before,*::after{box-sizing:border-box}
 body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;
   line-height:1.65;margin:0;padding:26px 16px 60px;-webkit-font-smoothing:antialiased}
-.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:46px}
+@media (max-width:600px){.wrap{gap:36px}}
 h1,h2{text-wrap:balance;margin:0}
 .eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin:0}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .masthead h1{font-size:19px;font-weight:650}
 .masthead .sub{color:var(--muted);font-size:13px;margin:3px 0 0}
-.sec{display:flex;flex-direction:column;gap:11px}
-.sec>h2{font-size:15px;font-weight:650}
-.sec>.note{font-size:12.5px;color:var(--muted);margin:-3px 0 2px}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec>h2{font-size:17px;font-weight:660;letter-spacing:-.02em;line-height:1.35}
+.sec>.note{font-size:12.5px;color:var(--muted);line-height:1.65;margin:-7px 0 1px}
 
 .banner{border-radius:4px;padding:12px 14px;font-size:13px;line-height:1.6;
   border:1px solid var(--down);background:var(--sunken);color:var(--ink)}
