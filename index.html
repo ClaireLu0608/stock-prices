@@ -124,7 +124,9 @@ footer{font-size:11.5px;color:var(--faint);line-height:1.7;border-top:1px solid 
   .ev li>span{display:block;color:var(--muted);font-size:13.5px;line-height:1.9;padding-left:14px}
   /* 正文里的百分数挑成等宽彩色，让一整段能扫读。
      方向本来就写在「涨/跌」和正负号里，颜色只是强化，不是唯一线索 */
-  .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;
+  /* display:inline 是保险：这个 span 嵌在正文 span 里，
+     一旦哪天有人写出 .ev span 这种后代选择器，每个数字都会自己占一行 */
+  .n{display:inline;font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;
     font-size:.95em;letter-spacing:-.01em;white-space:nowrap}
   .n.up{color:var(--up)} .n.down{color:var(--down)}
   .lz .jdate{margin:0 0 7px}
