@@ -369,15 +369,26 @@ function chart(curve, live){
       <span><i style="border-color:var(--s-voo);border-top-style:dashed"></i>VOO（整个大盘）</span>
       <span><i style="border-color:var(--s-qqq);border-top-style:dotted"></i>QQQ（科技股）</span></div></section>`);
 
+  // 两个口径都要摆出来。只给「从建仓起」会让人困惑：
+  // 8/18 QQQ 当日跌 1.69%，但它在我们 10:57 进场前就跌完了，从建仓起算反而是 +0.06%。
+  const dayCol = t => Q[t] ? `<span class="chip ${sign(Q[t].change_pct)}">${pct(Q[t].change_pct)}</span>` : '—';
   out.push(`<section class="sec"><h2>我们 vs 大盘</h2><div class="scroller"><table>
-    <thead><tr><th>　</th><th>现在</th><th>累计</th></tr></thead><tbody>
+    <thead><tr><th>　</th><th>现在</th><th>从建仓起</th><th>今天</th></tr></thead><tbody>
     <tr><td><i class="sw" style="background:var(--s-us)"></i>我们的组合</td><td>${fmt(net)}</td>
-      <td class="txt"><span class="chip ${sign(netPct)}">${pct(netPct)}</span></td></tr>
+      <td class="txt"><span class="chip ${sign(netPct)}">${pct(netPct)}</span></td>
+      <td class="txt">${priorDays.length?`<span class="chip ${sign(dayPct)}">${pct(dayPct)}</span>`:'—'}</td></tr>
     <tr><td><i class="sw" style="background:var(--s-voo)"></i>VOO</td><td>${fmt(bench.VOO)}</td>
-      <td class="txt"><span class="chip ${sign(vooPct)}">${pct(vooPct)}</span></td></tr>
+      <td class="txt"><span class="chip ${sign(vooPct)}">${pct(vooPct)}</span></td>
+      <td class="txt">${dayCol('VOO')}</td></tr>
     <tr><td><i class="sw" style="background:var(--s-qqq)"></i>QQQ</td><td>${fmt(bench.QQQ)}</td>
-      <td class="txt"><span class="chip ${sign(qqqPct)}">${pct(qqqPct)}</span></td></tr>
+      <td class="txt"><span class="chip ${sign(qqqPct)}">${pct(qqqPct)}</span></td>
+      <td class="txt">${dayCol('QQQ')}</td></tr>
     </tbody></table></div>
+    <p class="note"><b>这两列不是一回事，别看混了。</b>
+    「从建仓起」是拿 2026-08-18 上午 10:57 那一刻的市价当起点，三条线都从 $10,000 出发——
+    这是唯一公平的比法。「今天」是跟昨天收盘比，也就是新闻和行情软件报的那个数。
+    <b>同一天两个数可以差很远</b>：8/18 QQQ 当天跌 1.69%，但那一跌发生在我们进场之前，
+    从 10:57 算起它反而是涨的。</p>
     <p class="note"><b>跑赢 VOO 是硬标准。</b>只赚钱不算数——我们赚 4% 而 VOO 赚 7%，这半年的分析就是白费力气。</p></section>`);
 
   out.push(`<section class="sec"><h2>手里现在有什么</h2><div class="holds">` +
