@@ -129,15 +129,22 @@ MACRO = {
 }
 
 def yahoo(sym):
+    """从日线序列取「今天」和「昨天」，不要用 meta 里的 chartPreviousClose。
+
+    2026-08-19 踩过的坑：chartPreviousClose 不是昨收，是**请求时间窗之前**那一根
+    的收盘价——用 range=2d 时它指向两三天前。拿它当昨收，S&P 500 的当日涨跌
+    会从 +0.41% 算成 -0.34%（方向都反了），SOX 从 -1.90% 算成 -5.24%。
+    日线序列的最后两根一定是同一条序列上相邻的两天，内部自洽。
+    """
     url = ("https://query1.finance.yahoo.com/v8/finance/chart/"
-           + urllib.parse.quote(sym) + "?range=2d&interval=1d")
+           + urllib.parse.quote(sym) + "?range=5d&interval=1d")
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=20) as r:
-        m = json.load(r)["chart"]["result"][0]["meta"]
-    price = m.get("regularMarketPrice")
-    prev  = m.get("chartPreviousClose") or m.get("previousClose")
-    if price is None or not prev:
-        raise ValueError(f"无效: price={price} prev={prev}")
+        res = json.load(r)["chart"]["result"][0]
+    closes = [c for c in res["indicators"]["quote"][0]["close"] if c is not None]
+    if len(closes) < 2:
+        raise ValueError(f"日线不足两根，只有 {len(closes)} 根")
+    price, prev = closes[-1], closes[-2]
     return {"price": round(price, 4), "prev_close": round(prev, 4),
             "change": round(price - prev, 4),
             "change_pct": round((price / prev - 1) * 100, 4)}
