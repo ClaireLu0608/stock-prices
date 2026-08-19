@@ -373,7 +373,7 @@ function chart(curve, live){
   // 8/18 QQQ 当日跌 1.69%，但它在我们 10:57 进场前就跌完了，从建仓起算反而是 +0.06%。
   const dayCol = t => Q[t] ? `<span class="chip ${sign(Q[t].change_pct)}">${pct(Q[t].change_pct)}</span>` : '—';
   out.push(`<section class="sec"><h2>我们 vs 大盘</h2><div class="scroller"><table>
-    <thead><tr><th>　</th><th>现在</th><th>从建仓起</th><th>今天</th></tr></thead><tbody>
+    <thead><tr><th>　</th><th>现在</th><th>从建仓起</th><th>今天（对昨收）</th></tr></thead><tbody>
     <tr><td><i class="sw" style="background:var(--s-us)"></i>我们的组合</td><td>${fmt(net)}</td>
       <td class="txt"><span class="chip ${sign(netPct)}">${pct(netPct)}</span></td>
       <td class="txt">${priorDays.length?`<span class="chip ${sign(dayPct)}">${pct(dayPct)}</span>`:'—'}</td></tr>
