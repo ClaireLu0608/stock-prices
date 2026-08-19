@@ -112,22 +112,28 @@ footer{font-size:11.5px;color:var(--faint);line-height:1.7;border-top:1px solid 
 #loading{color:var(--muted);font-size:14px;padding:30px 0;text-align:center}
 
   /* 新闻 / 学习 / 催化剂 */
-  .jd{border-left:3px solid var(--accent);padding:2px 0 2px 13px;margin:0 0 16px}
+  .jd{margin:0 0 24px}
   .jd:last-child{margin-bottom:0}
-  .jhead{font-weight:650;font-size:15px;line-height:1.45;margin:0 0 3px}
-  .jdate{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.02em}
-  .ev{margin:11px 0 0;padding:0;list-style:none}
-  .ev li{margin:0 0 9px;font-size:13.5px;line-height:1.62}
-  .ev li:last-child{margin-bottom:0}
-  .ev b{display:block;font-weight:620;margin-bottom:1px}
-  .ev span{color:var(--muted)}
-  .act-note{margin:11px 0 0;padding:9px 11px;background:var(--sunken);border-radius:7px;
-    font-size:13px;line-height:1.6;color:var(--muted)}
-  .act-note b{color:var(--ink);font-weight:620}
-  .lz{padding:13px 15px;background:var(--sunken);border-radius:9px;margin:0 0 11px}
+  .jdate{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.05em;margin:0 0 6px}
+  .jhead{font-weight:680;font-size:17px;line-height:1.42;letter-spacing:-.015em;
+    margin:0 0 20px;text-wrap:balance}
+  .ev{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px}
+  .ev b{display:block;font-weight:650;font-size:14px;color:var(--ink);line-height:1.4;
+    margin:0 0 7px;padding-left:11px;border-left:3px solid var(--accent)}
+  .ev span{display:block;color:var(--muted);font-size:13.5px;line-height:1.9;padding-left:14px}
+  /* 正文里的百分数挑成等宽彩色，让一整段能扫读。
+     方向本来就写在「涨/跌」和正负号里，颜色只是强化，不是唯一线索 */
+  .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;
+    font-size:.95em;letter-spacing:-.01em;white-space:nowrap}
+  .n.up{color:var(--up)} .n.down{color:var(--down)}
+  .act-note{margin:20px 0 0;padding:13px 15px;background:var(--sunken);border-radius:8px;
+    font-size:13px;line-height:1.8;color:var(--muted)}
+  .act-note b{display:block;color:var(--faint);font-weight:600;font-size:10.5px;
+    letter-spacing:.1em;margin:0 0 6px}
+  .lz{padding:17px 18px;background:var(--sunken);border-radius:10px;margin:0 0 12px}
   .lz:last-child{margin-bottom:0}
-  .lz h3{margin:0 0 6px;font-size:14.5px;font-weight:660;letter-spacing:-.01em}
-  .lz p{margin:0;font-size:13.5px;line-height:1.68;color:var(--muted)}
+  .lz h3{margin:0 0 10px;font-size:15px;font-weight:670;letter-spacing:-.01em;line-height:1.4}
+  .lz p{margin:0;font-size:13.5px;line-height:1.9;color:var(--muted)}
   details.more{margin-top:14px}
   details.more>summary{cursor:pointer;font-size:12.5px;color:var(--accent);
     font-weight:600;list-style:none;padding:6px 0}
@@ -178,6 +184,15 @@ async function load(f){
   return r.json();
 }
 
+// 把正文里的百分数做成等宽彩色，让一段话能扫读而不是从头读到尾
+function richNum(raw){
+  return esc(raw)
+    .replace(/([涨跌])(了)?\s*(\d+(?:\.\d+)?%)/g,
+      (m,v,le,n)=>`${v}${le||''} <span class="n ${v==='涨'?'up':'down'}">${n}</span>`)
+    .replace(/(^|[^\d>])([+-]\d+(?:\.\d+)?%)/g,
+      (m,pre,n)=>`${pre}<span class="n ${n[0]==='+'?'up':'down'}">${n}</span>`);
+}
+
 // 美股此刻开着吗 —— 决定「价格旧了」是故障还是正常
 // 不判断这个，收盘后和整个周末都会弹红色警报；
 // 每天都喊狼来了的警报，真出事那天也不会有人看。
@@ -207,8 +222,8 @@ function journalCards(J){
     <p class="jdate">${esc(d.date)}</p>
     ${d.headline?`<p class="jhead">${esc(d.headline)}</p>`:''}
     ${(d.events&&d.events.length)?`<ul class="ev">`+d.events.map(e=>
-      `<li><b>${esc(e.t||'')}</b><span>${esc(e.d||'')}</span></li>`).join('')+`</ul>`:''}
-    ${d.action?`<p class="act-note"><b>我们今天怎么做的：</b>${esc(d.action)}</p>`:''}
+      `<li><b>${esc(e.t||'')}</b><span>${richNum(e.d||'')}</span></li>`).join('')+`</ul>`:''}
+    ${d.action?`<p class="act-note"><b>我们今天怎么做的</b>${richNum(d.action)}</p>`:''}
   </div>`;
   const [head,...rest]=J;
   return one(head) + (rest.length?`<details class="more"><summary>看更早的
@@ -221,7 +236,7 @@ function lessonCards(J){
     都是从当天真实行情里取的材，不是课本。</p>`;
   const one = d => `<div class="lz"><h3>${esc(d.lesson.t)}
     <span class="jdate" style="font-weight:400"> · ${esc(d.date.slice(5))}</span></h3>
-    <p>${esc(d.lesson.d)}</p></div>`;
+    <p>${richNum(d.lesson.d)}</p></div>`;
   const [head,...rest]=Ls;
   return one(head) + (rest.length?`<details class="more"><summary>复习前面学过的
     ${rest.length} 个</summary><div>`+rest.map(one).join('')+`</div></details>`:'');
