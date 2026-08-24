@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-08-24T20:33:45Z",
-  "fetched_at_unix": 1787603625,
+  "fetched_at_utc": "2026-08-24T21:32:31Z",
+  "fetched_at_unix": 1787607151,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -53,7 +53,7 @@
       "open": 163.87,
       "high": 165.22,
       "low": 162.25,
-      "quote_unix": -10800
+      "quote_unix": 1787601600
     },
     "SLB": {
       "price": 54,
@@ -63,7 +63,7 @@
       "open": 53.62,
       "high": 54.085,
       "low": 52.52,
-      "quote_unix": -10800
+      "quote_unix": 1787601600
     },
     "VOO": {
       "price": 701.83,
@@ -103,7 +103,7 @@
       "open": 181.68,
       "high": 181.8792,
       "low": 178.815,
-      "quote_unix": -10800
+      "quote_unix": 1787601600
     },
     "XLF": {
       "price": 58.22,
@@ -123,7 +123,7 @@
       "open": 174.41,
       "high": 174.92,
       "low": 173.33,
-      "quote_unix": -10800
+      "quote_unix": 1787601600
     },
     "XLU": {
       "price": 43.22,
@@ -607,10 +607,10 @@
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4708.2002,
+      "price": 4710.0,
       "prev_close": 4624.1001,
-      "change": 84.1001,
-      "change_pct": 1.8187,
+      "change": 85.8999,
+      "change_pct": 1.8577,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 98.998,
+      "price": 98.985,
       "prev_close": 98.8,
-      "change": 0.198,
-      "change_pct": 0.2004,
+      "change": 0.185,
+      "change_pct": 0.1872,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
