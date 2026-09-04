@@ -1,9 +1,9 @@
 {
-  "fetched_at_utc": "2026-09-03T22:24:36Z",
-  "fetched_at_unix": 1788474276,
+  "fetched_at_utc": "2026-09-04T00:18:01Z",
+  "fetched_at_unix": 1788481081,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
-  "symbols_ok": 55,
+  "symbols_ok": 53,
   "quotes": {
     "COP": {
       "price": 135.72,
@@ -345,26 +345,6 @@
       "low": 106.02,
       "quote_unix": 1788465600
     },
-    "HD": {
-      "price": 318.07,
-      "change": -0.44,
-      "change_pct": -0.1381,
-      "prev_close": 318.51,
-      "open": 318.21,
-      "high": 320.44,
-      "low": 315.21,
-      "quote_unix": 1788465600
-    },
-    "AAPL": {
-      "price": 328.21,
-      "change": 3.25,
-      "change_pct": 1.0001,
-      "prev_close": 324.96,
-      "open": 324.87,
-      "high": 330.81,
-      "low": 324.11,
-      "quote_unix": 1788465600
-    },
     "MSFT": {
       "price": 510.12,
       "change": 13.3,
@@ -556,7 +536,16 @@
       "quote_unix": 1788465600
     }
   },
-  "errors": [],
+  "errors": [
+    {
+      "symbol": "HD",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "symbol": "AAPL",
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ],
   "macro": {
     "SP500": {
       "price": 7747.71,
@@ -599,18 +588,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 91.77,
+      "price": 91.69,
       "prev_close": 91.01,
-      "change": 0.76,
-      "change_pct": 0.8351,
+      "change": 0.68,
+      "change_pct": 0.7472,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4523.8999,
+      "price": 4527.8999,
       "prev_close": 4366.2998,
-      "change": 157.6001,
-      "change_pct": 3.6095,
+      "change": 161.6001,
+      "change_pct": 3.7011,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +620,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 99.003,
+      "price": 98.928,
       "prev_close": 99.56,
-      "change": -0.557,
-      "change_pct": -0.5595,
+      "change": -0.632,
+      "change_pct": -0.6348,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
