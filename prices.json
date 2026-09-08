@@ -1,9 +1,9 @@
 {
-  "fetched_at_utc": "2026-09-08T20:08:28Z",
-  "fetched_at_unix": 1788898108,
+  "fetched_at_utc": "2026-09-08T22:55:06Z",
+  "fetched_at_unix": 1788908106,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
-  "symbols_ok": 55,
+  "symbols_ok": 52,
   "quotes": {
     "COP": {
       "price": 135.04,
@@ -236,9 +236,9 @@
       "quote_unix": 1788897600
     },
     "IWM": {
-      "price": 294.69,
-      "change": -1.32,
-      "change_pct": -0.4459,
+      "price": 294.67,
+      "change": -1.34,
+      "change_pct": -0.4527,
       "prev_close": 296.01,
       "open": 295.34,
       "high": 296.1,
@@ -406,9 +406,9 @@
       "quote_unix": 1788897600
     },
     "TSLA": {
-      "price": 368.04,
-      "change": 13.96,
-      "change_pct": 3.9426,
+      "price": 368.16,
+      "change": 14.08,
+      "change_pct": 3.9765,
       "prev_close": 354.08,
       "open": 357.095,
       "high": 370,
@@ -524,39 +524,22 @@
       "high": 138.975,
       "low": 136.4,
       "quote_unix": 1788897600
-    },
-    "BAC": {
-      "price": 62.39,
-      "change": -0.29,
-      "change_pct": -0.4627,
-      "prev_close": 62.68,
-      "open": 62.49,
-      "high": 62.82,
-      "low": 62.11,
-      "quote_unix": 1788897600
-    },
-    "BRK.B": {
-      "price": 505.83,
-      "change": -0.2,
-      "change_pct": -0.0395,
-      "prev_close": 506.03,
-      "open": 503,
-      "high": 507.3,
-      "low": 500.7,
-      "quote_unix": 1788897600
-    },
-    "ORCL": {
-      "price": 162.52,
-      "change": 3.74,
-      "change_pct": 2.3555,
-      "prev_close": 158.78,
-      "open": 167.6,
-      "high": 170.7,
-      "low": 161.16,
-      "quote_unix": 1788897600
     }
   },
-  "errors": [],
+  "errors": [
+    {
+      "symbol": "BAC",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "symbol": "BRK.B",
+      "error": "HTTP Error 429: Too Many Requests"
+    },
+    {
+      "symbol": "ORCL",
+      "error": "HTTP Error 429: Too Many Requests"
+    }
+  ],
   "macro": {
     "SP500": {
       "price": 7673.52,
@@ -583,10 +566,10 @@
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 15.63,
+      "price": 15.72,
       "prev_close": 15.3,
-      "change": 0.33,
-      "change_pct": 2.1569,
+      "change": 0.42,
+      "change_pct": 2.7451,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
@@ -599,18 +582,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 93.67,
+      "price": 94.24,
       "prev_close": 91.48,
-      "change": 2.19,
-      "change_pct": 2.394,
+      "change": 2.76,
+      "change_pct": 3.017,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4407.7002,
+      "price": 4395.2998,
       "prev_close": 4429.7998,
-      "change": -22.0996,
-      "change_pct": -0.4989,
+      "change": -34.5,
+      "change_pct": -0.7788,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +614,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 98.862,
+      "price": 98.836,
       "prev_close": 99.16,
-      "change": -0.298,
-      "change_pct": -0.3005,
+      "change": -0.324,
+      "change_pct": -0.3267,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
