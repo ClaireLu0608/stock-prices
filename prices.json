@@ -1,9 +1,9 @@
 {
-  "fetched_at_utc": "2026-09-28T20:03:36Z",
-  "fetched_at_unix": 1790625816,
+  "fetched_at_utc": "2026-09-29T00:29:58Z",
+  "fetched_at_unix": 1790641798,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
-  "symbols_ok": 54,
+  "symbols_ok": 55,
   "quotes": {
     "COP": {
       "price": 126.04,
@@ -46,14 +46,14 @@
       "quote_unix": 1790625600
     },
     "XOM": {
-      "price": 162.53,
-      "change": 1.94,
-      "change_pct": 1.208,
+      "price": 162.52,
+      "change": 1.93,
+      "change_pct": 1.2018,
       "prev_close": 160.59,
       "open": 162.8,
       "high": 163.54,
       "low": 161.05,
-      "quote_unix": 1790625599
+      "quote_unix": 1790625600
     },
     "SLB": {
       "price": 51.49,
@@ -106,9 +106,9 @@
       "quote_unix": 1790625600
     },
     "XLF": {
-      "price": 54.2,
-      "change": -0.64,
-      "change_pct": -1.167,
+      "price": 54.19,
+      "change": -0.65,
+      "change_pct": -1.1853,
       "prev_close": 54.84,
       "open": 54.67,
       "high": 54.725,
@@ -236,9 +236,9 @@
       "quote_unix": 1790625600
     },
     "IWM": {
-      "price": 280.05,
-      "change": -1.92,
-      "change_pct": -0.6809,
+      "price": 280.02,
+      "change": -1.95,
+      "change_pct": -0.6916,
       "prev_close": 281.97,
       "open": 280.33,
       "high": 281.93,
@@ -246,9 +246,9 @@
       "quote_unix": 1790625600
     },
     "HYG": {
-      "price": 77.53,
-      "change": -0.33,
-      "change_pct": -0.4238,
+      "price": 77.54,
+      "change": -0.32,
+      "change_pct": -0.411,
       "prev_close": 77.86,
       "open": 77.6,
       "high": 77.65,
@@ -286,14 +286,14 @@
       "quote_unix": 1790625600
     },
     "CVX": {
-      "price": 206.25,
-      "change": 1.8,
-      "change_pct": 0.8804,
+      "price": 206.37,
+      "change": 1.92,
+      "change_pct": 0.9391,
       "prev_close": 204.45,
       "open": 207,
       "high": 208.25,
       "low": 205.38,
-      "quote_unix": 1790625599
+      "quote_unix": 1790625600
     },
     "AEM": {
       "price": 184.15,
@@ -313,6 +313,16 @@
       "open": 930.94,
       "high": 932,
       "low": 914.5,
+      "quote_unix": 1790625600
+    },
+    "MU": {
+      "price": 1053.98,
+      "change": -28.3,
+      "change_pct": -2.6149,
+      "prev_close": 1082.28,
+      "open": 1075.98,
+      "high": 1084.81,
+      "low": 1032,
       "quote_unix": 1790625600
     },
     "AVGO": {
@@ -406,9 +416,9 @@
       "quote_unix": 1790625600
     },
     "LLY": {
-      "price": 1185.97,
-      "change": 2.51,
-      "change_pct": 0.2121,
+      "price": 1184.78,
+      "change": 1.32,
+      "change_pct": 0.1115,
       "prev_close": 1183.46,
       "open": 1180.3,
       "high": 1194.09,
@@ -436,14 +446,14 @@
       "quote_unix": 1790625600
     },
     "PG": {
-      "price": 149.045,
-      "change": 2.815,
-      "change_pct": 1.925,
+      "price": 149.03,
+      "change": 2.8,
+      "change_pct": 1.9148,
       "prev_close": 146.23,
       "open": 145.86,
       "high": 149.48,
       "low": 145.11,
-      "quote_unix": 1790625599
+      "quote_unix": 1790625600
     },
     "KO": {
       "price": 87.18,
@@ -506,9 +516,9 @@
       "quote_unix": 1790625600
     },
     "PLD": {
-      "price": 132.47,
-      "change": -0.58,
-      "change_pct": -0.4359,
+      "price": 132.44,
+      "change": -0.61,
+      "change_pct": -0.4585,
       "prev_close": 133.05,
       "open": 133.09,
       "high": 134.34,
@@ -526,9 +536,9 @@
       "quote_unix": 1790625600
     },
     "BRK.B": {
-      "price": 502.98,
-      "change": -2.5,
-      "change_pct": -0.4946,
+      "price": 503.09,
+      "change": -2.39,
+      "change_pct": -0.4728,
       "prev_close": 505.48,
       "open": 505,
       "high": 507.24,
@@ -536,9 +546,9 @@
       "quote_unix": 1790625600
     },
     "ORCL": {
-      "price": 132.64,
-      "change": -4.46,
-      "change_pct": -3.2531,
+      "price": 132.6,
+      "change": -4.5,
+      "change_pct": -3.2823,
       "prev_close": 137.1,
       "open": 132.725,
       "high": 135.69,
@@ -546,18 +556,13 @@
       "quote_unix": 1790625600
     }
   },
-  "errors": [
-    {
-      "symbol": "MU",
-      "error": "The read operation timed out"
-    }
-  ],
+  "errors": [],
   "macro": {
     "SP500": {
-      "price": 7683.8799,
+      "price": 7683.6899,
       "prev_close": 7743.4102,
-      "change": -59.5303,
-      "change_pct": -0.7688,
+      "change": -59.7202,
+      "change_pct": -0.7712,
       "symbol": "^GSPC",
       "desc": "S&P 500 指数"
     },
@@ -570,18 +575,18 @@
       "desc": "Nasdaq 综合指数"
     },
     "DOW": {
-      "price": 51481.1016,
+      "price": 51481.5117,
       "prev_close": 51828.6211,
-      "change": -347.5195,
-      "change_pct": -0.6705,
+      "change": -347.1094,
+      "change_pct": -0.6697,
       "symbol": "^DJI",
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 16.11,
+      "price": 16.07,
       "prev_close": 14.87,
-      "change": 1.24,
-      "change_pct": 8.3389,
+      "change": 1.2,
+      "change_pct": 8.0699,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
@@ -594,18 +599,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 92.8,
+      "price": 93.4,
       "prev_close": 92.41,
-      "change": 0.39,
-      "change_pct": 0.422,
+      "change": 0.99,
+      "change_pct": 1.0713,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4159.0,
+      "price": 4150.2002,
       "prev_close": 4321.2002,
-      "change": -162.2002,
-      "change_pct": -3.7536,
+      "change": -171.0,
+      "change_pct": -3.9572,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -626,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 101.202,
+      "price": 101.253,
       "prev_close": 100.97,
-      "change": 0.232,
-      "change_pct": 0.2298,
+      "change": 0.283,
+      "change_pct": 0.2803,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
