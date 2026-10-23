@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-10-22T21:19:25Z",
-  "fetched_at_unix": 1792703965,
+  "fetched_at_utc": "2026-10-23T00:05:57Z",
+  "fetched_at_unix": 1792713957,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -599,18 +599,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 99.1,
+      "price": 99.31,
       "prev_close": 97.15,
-      "change": 1.95,
-      "change_pct": 2.0072,
+      "change": 2.16,
+      "change_pct": 2.2234,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4039.8,
+      "price": 4038.3,
       "prev_close": 4150.0,
-      "change": -110.2,
-      "change_pct": -2.6554,
+      "change": -111.7,
+      "change_pct": -2.6916,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 101.631,
+      "price": 101.565,
       "prev_close": 101.78,
-      "change": -0.149,
-      "change_pct": -0.1464,
+      "change": -0.215,
+      "change_pct": -0.2112,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
