@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-11-18T21:10:10Z",
-  "fetched_at_unix": 1795036210,
+  "fetched_at_utc": "2026-11-19T02:44:49Z",
+  "fetched_at_unix": 1795056289,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -96,9 +96,9 @@
       "quote_unix": 1795035600
     },
     "XLK": {
-      "price": 163.79,
-      "change": 0.53,
-      "change_pct": 0.3246,
+      "price": 163.81,
+      "change": 0.55,
+      "change_pct": 0.3369,
       "prev_close": 163.26,
       "open": 164.66,
       "high": 165.39,
@@ -116,9 +116,9 @@
       "quote_unix": 1795035600
     },
     "XLV": {
-      "price": 181.15,
-      "change": -4.09,
-      "change_pct": -2.2079,
+      "price": 181.17,
+      "change": -4.07,
+      "change_pct": -2.1971,
       "prev_close": 185.24,
       "open": 183.69,
       "high": 185.285,
@@ -126,9 +126,9 @@
       "quote_unix": 1795035600
     },
     "XLU": {
-      "price": 43.54,
-      "change": 0.12,
-      "change_pct": 0.2764,
+      "price": 43.55,
+      "change": 0.13,
+      "change_pct": 0.2994,
       "prev_close": 43.42,
       "open": 43.2,
       "high": 43.72,
@@ -236,9 +236,9 @@
       "quote_unix": 1795035600
     },
     "IWM": {
-      "price": 270.11,
-      "change": 1.06,
-      "change_pct": 0.394,
+      "price": 270.12,
+      "change": 1.07,
+      "change_pct": 0.3977,
       "prev_close": 269.05,
       "open": 268.15,
       "high": 272.36,
@@ -326,9 +326,9 @@
       "quote_unix": 1795035600
     },
     "AVGO": {
-      "price": 354.08,
-      "change": 12.48,
-      "change_pct": 3.6534,
+      "price": 354.05,
+      "change": 12.45,
+      "change_pct": 3.6446,
       "prev_close": 341.6,
       "open": 348.705,
       "high": 357.34,
@@ -583,10 +583,10 @@
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 24.39,
+      "price": 24.56,
       "prev_close": 25.46,
-      "change": -1.07,
-      "change_pct": -4.2027,
+      "change": -0.9,
+      "change_pct": -3.535,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
@@ -599,18 +599,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 81.87,
-      "prev_close": 86.01,
-      "change": -4.14,
-      "change_pct": -4.8134,
+      "price": 82.33,
+      "prev_close": 83.26,
+      "change": -0.93,
+      "change_pct": -1.117,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 3727.2,
-      "prev_close": 3864.2,
-      "change": -137.0,
-      "change_pct": -3.5454,
+      "price": 3743.5,
+      "prev_close": 3741.8999,
+      "change": 1.6001,
+      "change_pct": 0.0428,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 103.783,
-      "prev_close": 103.49,
-      "change": 0.293,
-      "change_pct": 0.2831,
+      "price": 103.872,
+      "prev_close": 103.86,
+      "change": 0.012,
+      "change_pct": 0.0116,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
