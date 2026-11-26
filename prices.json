@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-11-26T04:18:26Z",
-  "fetched_at_unix": 1795666706,
+  "fetched_at_utc": "2026-11-26T22:11:00Z",
+  "fetched_at_unix": 1795731060,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -567,50 +567,50 @@
       "desc": "S&P 500 指数"
     },
     "NASDAQ": {
-      "price": 23585.8027,
+      "price": 23585.8008,
       "prev_close": 23733.5391,
-      "change": -147.7363,
+      "change": -147.7383,
       "change_pct": -0.6225,
       "symbol": "^IXIC",
       "desc": "Nasdaq 综合指数"
     },
     "DOW": {
-      "price": 50182.8984,
+      "price": 50182.9492,
       "prev_close": 50018.6992,
-      "change": 164.1992,
-      "change_pct": 0.3283,
+      "change": 164.25,
+      "change_pct": 0.3284,
       "symbol": "^DJI",
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 28.29,
-      "prev_close": 26.36,
-      "change": 1.93,
-      "change_pct": 7.3217,
+      "price": 26.8,
+      "prev_close": 28.29,
+      "change": -1.49,
+      "change_pct": -5.2669,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
     "SOX": {
-      "price": 8774.8623,
+      "price": 8774.8604,
       "prev_close": 8832.5,
-      "change": -57.6377,
+      "change": -57.6396,
       "change_pct": -0.6526,
       "symbol": "^SOX",
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 84.36,
+      "price": 84.91,
       "prev_close": 83.68,
-      "change": 0.68,
-      "change_pct": 0.8126,
+      "change": 1.23,
+      "change_pct": 1.4699,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 3605.8999,
+      "price": 3593.3999,
       "prev_close": 3535.8,
-      "change": 70.0999,
-      "change_pct": 1.9826,
+      "change": 57.5999,
+      "change_pct": 1.629,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 103.811,
+      "price": 103.782,
       "prev_close": 103.67,
-      "change": 0.141,
-      "change_pct": 0.136,
+      "change": 0.112,
+      "change_pct": 0.108,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
