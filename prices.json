@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-11-25T22:12:38Z",
-  "fetched_at_unix": 1795644758,
+  "fetched_at_utc": "2026-11-26T04:18:26Z",
+  "fetched_at_unix": 1795666706,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -575,10 +575,10 @@
       "desc": "Nasdaq 综合指数"
     },
     "DOW": {
-      "price": 50182.9492,
+      "price": 50182.8984,
       "prev_close": 50018.6992,
-      "change": 164.25,
-      "change_pct": 0.3284,
+      "change": 164.1992,
+      "change_pct": 0.3283,
       "symbol": "^DJI",
       "desc": "Dow 道琼斯工业指数"
     },
@@ -599,18 +599,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 84.15,
-      "prev_close": 82.05,
-      "change": 2.1,
-      "change_pct": 2.5594,
+      "price": 84.36,
+      "prev_close": 83.68,
+      "change": 0.68,
+      "change_pct": 0.8126,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 3617.8,
-      "prev_close": 3561.8999,
-      "change": 55.9001,
-      "change_pct": 1.5694,
+      "price": 3605.8999,
+      "prev_close": 3535.8,
+      "change": 70.0999,
+      "change_pct": 1.9826,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 103.707,
-      "prev_close": 103.81,
-      "change": -0.103,
-      "change_pct": -0.0992,
+      "price": 103.811,
+      "prev_close": 103.67,
+      "change": 0.141,
+      "change_pct": 0.136,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
